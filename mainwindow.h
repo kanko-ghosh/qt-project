@@ -30,6 +30,10 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_show_grid_clicked();
+
+    void on_grid_size_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     QPoint p1,p2;

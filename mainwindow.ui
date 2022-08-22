@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>999</width>
+    <width>1219</width>
     <height>736</height>
    </rect>
   </property>
@@ -234,14 +234,37 @@ background-color: rgb(85, 255, 255);</string>
      <string>RESET</string>
     </property>
    </widget>
+   <widget class="QCheckBox" name="show_grid">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>10</y>
+      <width>93</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show Grid</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="grid_size">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>50</y>
+      <width>91</width>
+      <height>29</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>999</width>
-     <height>21</height>
+     <width>1219</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>
