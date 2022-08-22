@@ -29,7 +29,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::point(int x,int y)
 {
-
     img.setPixel(x,y,qRgb(255,255,0));
     ui->frame->setPixmap(QPixmap::fromImage(img));
 }
@@ -37,11 +36,13 @@ void MainWindow::point(int x,int y)
 
 void MainWindow::showMousePosition(QPoint &pos)
 {
-    ui->mouse_movement->setText(" X : "+QString::number(pos.x())+", Y : "+QString::number(pos.y()));
+    int grid_size = ui->grid_size->value();
+    ui->mouse_movement->setText(" X : "+QString::number((pos.x() - height_total/2)/grid_size)+", Y : "+QString::number((pos.y() - height_total/2)/grid_size));
 }
 void MainWindow::Mouse_Pressed()
 {
-    ui->mouse_pressed->setText(" X : "+QString::number(ui->frame->x)+", Y : "+QString::number(ui->frame->y));
+    int grid_size = ui->grid_size->value();
+    ui->mouse_pressed->setText(" X : "+QString::number((ui->frame->x - height_total/2)/grid_size)+", Y : "+QString::number((ui->frame->y - height_total/2)/grid_size));
     point(ui->frame->x,ui->frame->y);
 //    ui->x_axis->move(0,ui->frame->y);
 //    ui->y_axis->move(ui->frame->x,0);
