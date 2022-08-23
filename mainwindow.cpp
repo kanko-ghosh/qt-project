@@ -269,7 +269,7 @@ void MainWindow::_dda_line(int x1, int y1, int x2, int y2)
     int ix, iy, end = (dx > dy)? dx: dy;  // integer x and y co-ordinates
     for(int k = 0; k <= end; k++)
     {
-        ix = round(x + 0.5), iy = round(y + 0.5);
+        ix = (int)(x + 0.5*abs(x)/x), iy = (int)(y + 0.5*abs(y)/y);
         draw_pt(ix, iy, qRgb(0, 255, 0));
         x += Dx, y += Dy;
     }
