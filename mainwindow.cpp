@@ -10,6 +10,21 @@
 
 const int height_total = 700;
 
+QPoint MainWindow::orig_to_user (int x, int y){
+    int grid_size = ui->grid_size->value();
+    int user_x = x;
+    int user_y = y;
+
+    int xsgn=(user_x > height_total/2) ? +1 : -1;
+    int ysgn=(user_y > height_total/2) ? +1 : -1;
+
+    user_x = (user_x - height_total/2 + grid_size/2*xsgn )/grid_size;
+    user_y = (user_y - height_total/2 + grid_size/2*ysgn )/grid_size;
+
+    return QPoint(user_x, user_y);
+}
+
+
 QImage img=QImage(700,700,QImage::Format_RGB888);
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,25 +44,25 @@ MainWindow::~MainWindow()
 
 void MainWindow::point(int x,int y)
 {
-      std::cout << x << ":" << y <<":" << std::endl;
-      int grid_size = ui->grid_size->value();
-      int user_x = (x-height_total/2)/grid_size;
-      int user_y = (y-height_total/2)/grid_size;
-      draw_pt(user_x, user_y, qRgb(255,255,0));
+      auto pt = orig_to_user(x,y);
+      draw_pt(pt.x(), pt.y(), qRgb(255,255,0));
 //    img.setPixel(x,y,qRgb(255,255,0));
 //    ui->frame->setPixmap(QPixmap::fromImage(img));
 }
 
 
+
 void MainWindow::showMousePosition(QPoint &pos)
 {
-    int grid_size = ui->grid_size->value();
-    ui->mouse_movement->setText(" X : "+QString::number((pos.x() - height_total/2)/grid_size)+", Y : "+QString::number((pos.y() - height_total/2)/grid_size));
+    auto pt = orig_to_user(pos.x(), pos.y());
+    std::cout << pos.x() << ":" << pos.y() << std::endl;
+    ui->mouse_movement->setText(" X : "+QString::number(pt.x())+", Y : "+QString::number(pt.y()));
 }
+
 void MainWindow::Mouse_Pressed()
 {
-    int grid_size = ui->grid_size->value();
-    ui->mouse_pressed->setText(" X : "+QString::number((ui->frame->x - height_total/2)/grid_size)+", Y : "+QString::number((ui->frame->y - height_total/2)/grid_size));
+    auto pt = orig_to_user(ui->frame->x, ui->frame->y);
+    ui->mouse_pressed->setText(" X : "+QString::number(pt.x())+", Y : "+QString::number(pt.y()));
     point(ui->frame->x,ui->frame->y);
 //    ui->x_axis->move(0,ui->frame->y);
 //    ui->y_axis->move(ui->frame->x,0);
@@ -98,8 +113,16 @@ void MainWindow::on_Draw_clicked()
         painter.drawEllipse(p1,r0,r0);
     }
     if(ui->draw_line->isChecked()){
-        painter.setPen(Qt::red);
-        painter.drawLine(p1,p2);
+          painter.setPen(Qt::red);
+          painter.drawLine(p1,p2);
+          auto pa = orig_to_user(p1.x(), p1.y());
+          auto pb = orig_to_user(p2.x(), p2.y());
+          int x1 = pa.x();
+          int y1 = pa.y();
+          int x2 = pb.x();
+          int y2 = pb.y();
+
+          _dda_line(x1, y1, x2, y2);
     }
     ui->frame->setPixmap(QPixmap::fromImage(img));
 }
@@ -196,9 +219,6 @@ void MainWindow::on_grid_size_valueChanged(int arg1)
 
 void MainWindow::draw_pt(int x, int y, QRgb color) {
     int grid_size = ui->grid_size->value();
-//    if(k <= 1 || x < 0 || y < 0) return;
-
-//    int userX = x, userY = y;
     int midx = x * grid_size + height_total/2;
     int midy = y * grid_size + height_total/2;
 
@@ -208,13 +228,50 @@ void MainWindow::draw_pt(int x, int y, QRgb color) {
         }
     }
     ui->frame->setPixmap(QPixmap::fromImage(img));
-
-
-//    int xStart = userX * k + 1, yStart = userY * k + 1;
-//    int xEnd = std::min((userX + 1) * k - 1, img.height() - 1), yEnd = std::min((userY + 1) * k - 1, img.width() - 1);
-//    for(int i = xStart; i <= xEnd; i++)
-//        for(int j = yStart; j <= yEnd; j++)
-//            img.setPixel(i, j, color);
-
-//    ui->frame->setPixmap(QPixmap::fromImage(img));
 }
+
+void MainWindow::_dda_line(int x1, int y1, int x2, int y2)
+{
+    draw_pt(x1, y1, qRgb(255,255,255));
+    draw_pt(x2, y2, qRgb(255,255,255));
+
+    float dx, dy;
+    float x, y;
+    float Dx, Dy;
+
+    // Base Case
+    if(x1 == x2 && y1 == y2){
+        draw_pt(x1, y1, qRgb(0, 255, 0));
+        return;
+    }
+
+    dx = x2 - x1;  // total span in x
+    dy = y2 - y1;  // total span in y
+    x = x1;
+    y = y1;
+
+    // incremental steps in x and y
+    if(abs(dx) > abs(dy))
+    {
+        Dx = (dx > 0)? 1: -1;
+        Dy = dy / abs(dx);
+    }
+    else
+    {
+        Dx = dx / abs(dy);
+        Dy = (dy > 0)? 1: -1;
+    }
+
+    // to get the number of iterations correctly
+    if(dx < 0) dx = -dx;
+    if(dy < 0) dy = -dy;
+
+    int ix, iy, end = (dx > dy)? dx: dy;  // integer x and y co-ordinates
+    for(int k = 0; k <= end; k++)
+    {
+        ix = round(x + 0.5), iy = round(y + 0.5);
+        draw_pt(ix, iy, qRgb(0, 255, 0));
+        x += Dx, y += Dy;
+    }
+}
+
