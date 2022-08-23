@@ -38,6 +38,7 @@ private:
     Ui::MainWindow *ui;
     QPoint p1,p2;
     void point(int,int);
+    void draw_pt(int x, int y, QRgb color);
 };
 
 #endif // MAINWINDOW_H

@@ -29,8 +29,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::point(int x,int y)
 {
-    img.setPixel(x,y,qRgb(255,255,0));
-    ui->frame->setPixmap(QPixmap::fromImage(img));
+      std::cout << x << ":" << y <<":" << std::endl;
+      int grid_size = ui->grid_size->value();
+      int user_x = (x-height_total/2)/grid_size;
+      int user_y = (y-height_total/2)/grid_size;
+      draw_pt(user_x, user_y, qRgb(255,255,0));
+//    img.setPixel(x,y,qRgb(255,255,0));
+//    ui->frame->setPixmap(QPixmap::fromImage(img));
 }
 
 
@@ -115,7 +120,6 @@ void MainWindow::on_show_grid_clicked()
 {
     int grid_size = ui->grid_size->value();
     int midx = height_total/2;
-    std::cout << "Reached";
     if (ui->show_grid->isChecked()){
         for (int i = midx + grid_size/2; i < height_total; i+=grid_size){
             for (int j = 0; j < height_total; j++){
@@ -188,4 +192,29 @@ void MainWindow::on_grid_size_valueChanged(int arg1)
         ui->x_axis->show();
         ui->y_axis->show();
     }
+}
+
+void MainWindow::draw_pt(int x, int y, QRgb color) {
+    int grid_size = ui->grid_size->value();
+//    if(k <= 1 || x < 0 || y < 0) return;
+
+//    int userX = x, userY = y;
+    int midx = x * grid_size + height_total/2;
+    int midy = y * grid_size + height_total/2;
+
+    for (int i = midx - grid_size/2; i <= midx + grid_size/2; i++){
+        for (int j = midy - grid_size/2; j <= midy + grid_size/2; j++){
+            if (i < height_total && j < height_total && i > 0 && j > 0 ) img.setPixel(i, j, color);
+        }
+    }
+    ui->frame->setPixmap(QPixmap::fromImage(img));
+
+
+//    int xStart = userX * k + 1, yStart = userY * k + 1;
+//    int xEnd = std::min((userX + 1) * k - 1, img.height() - 1), yEnd = std::min((userY + 1) * k - 1, img.width() - 1);
+//    for(int i = xStart; i <= xEnd; i++)
+//        for(int j = yStart; j <= yEnd; j++)
+//            img.setPixel(i, j, color);
+
+//    ui->frame->setPixmap(QPixmap::fromImage(img));
 }
