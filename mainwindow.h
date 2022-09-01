@@ -34,6 +34,10 @@ private slots:
 
     void on_grid_size_valueChanged(int arg1);
 
+    void on_dda_clicked();
+
+    void on_bresenham_line_clicked();
+
 private:
     Ui::MainWindow *ui;
     QPoint p1,p2;
@@ -41,6 +45,7 @@ private:
     QPoint orig_to_user (int x, int y);
     void draw_pt(int x, int y, QRgb color);
     void _dda_line(int x1, int y1, int x2, int y2);
+    void _bresenham(int x1, int y1, int x2, int y2);
 };
 
 #endif // MAINWINDOW_H

@@ -106,11 +106,17 @@
       <x>0</x>
       <y>225</y>
       <width>700</width>
-      <height>1</height>
+      <height>5</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 85, 255);</string>
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -121,13 +127,19 @@
      <rect>
       <x>225</x>
       <y>0</y>
-      <width>1</width>
+      <width>5</width>
       <height>700</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">
-background-color: rgb(85, 255, 255);</string>
+background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -150,7 +162,7 @@ background-color: rgb(85, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>710</x>
-      <y>290</y>
+      <y>350</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -225,7 +237,7 @@ background-color: rgb(85, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>710</x>
-      <y>340</y>
+      <y>400</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -256,18 +268,37 @@ background-color: rgb(85, 255, 255);</string>
       <height>29</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>5</number>
+    </property>
+    <property name="singleStep">
+     <number>2</number>
+    </property>
    </widget>
-   <widget class="QPushButton" name="temp">
+   <widget class="QPushButton" name="bresenham_line">
     <property name="geometry">
      <rect>
-      <x>1050</x>
-      <y>170</y>
-      <width>83</width>
-      <height>29</height>
+      <x>830</x>
+      <y>270</y>
+      <width>111</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Bresenham</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="dda">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>270</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>DDA</string>
     </property>
    </widget>
   </widget>

@@ -270,3 +270,101 @@ void MainWindow::_dda_line(int x1, int y1, int x2, int y2) {
     }
 }
 
+void MainWindow::_bresenham(int x1, int y1, int x2, int y2) {
+    if(y1 == y2)
+        {
+            int start = std::min(x1, x2), end = std::max(x1, x2);
+            for(int i = start; i <= end; i++) draw_pt(i, y1, qRgb(255,255,0));
+            return;
+        }
+
+        // Case for vertical line
+        if(x1 == x2)
+        {
+            int start = std::min(y1, y2), end = std::max(y1, y2);
+            for(int j = start; j <= end; j++) draw_pt(x1, j, qRgb(255,255,0));
+            return;
+        }
+
+        int dx = x2 - x1, dy = y2 - y1, p;
+
+        // Case for |m| <= 1
+        if(abs(dy) <= abs(dx))
+        {
+            if(x1 > x2) std::swap(x1, x2), std::swap(y1, y2), dx = -dx, dy = -dy;
+
+            int j = (dy > 0)? y1: (y1 + 1);
+            p = 2 * dy - dx;
+            draw_pt(x1, y1, qRgb(255,255,0));  // Plotting initial point ...
+            for(int i = x1 + 1; i <= x2; i++)
+            {
+                if(dy > 0)
+                {
+                    if(p < 0) p += 2 * dy;
+                    else p += 2 * dy - 2 * dx, j++;
+                }
+                else
+                {
+                    if(p > 0) p += 2 * dy;
+                    else p += 2 * dy + 2 * dx, j--;
+                }
+
+                draw_pt(i, j, qRgb(255,255,0));
+            }
+        }
+
+        // Case for |m| > 1
+        else
+        {
+            if(y1 > y2) std::swap(x1, x2), std::swap(y1, y2), dx = -dx, dy = -dy;
+
+            int i = (dx > 0)? x1: (x1 + 1);
+            p = 2 * dx - dy;
+            draw_pt(x1, y1, qRgb(255,255,0));  // Plotting initial point ...
+            for(int j = y1 + 1; j <= y2; j++)
+            {
+                if(dx > 0)
+                {
+                    if(p < 0) p += 2 * dx;
+                    else p += 2 * dx - 2 * dy, i++;
+                }
+                else
+                {
+                    if(p > 0) p += 2 * dx;
+                    else p += 2 * dx + 2 * dy, i--;
+                }
+
+                draw_pt(i, j, qRgb(255,255,0));
+            }
+        }
+
+}
+
+
+void MainWindow::on_dda_clicked()
+{
+    if(ui->draw_line->isChecked()){
+          auto pa = orig_to_user(p1.x(), p1.y());
+          auto pb = orig_to_user(p2.x(), p2.y());
+          int x1 = pa.x();
+          int y1 = pa.y();
+          int x2 = pb.x();
+          int y2 = pb.y();
+          _dda_line(x1, y1, x2, y2);
+    }
+}
+
+
+void MainWindow::on_bresenham_line_clicked()
+{
+    if(ui->draw_line->isChecked()){
+          auto pa = orig_to_user(p1.x(), p1.y());
+          auto pb = orig_to_user(p2.x(), p2.y());
+          int x1 = pa.x();
+          int y1 = pa.y();
+          int x2 = pb.x();
+          int y2 = pb.y();
+          _bresenham(x1, y1, x2, y2);
+    }
+}
+

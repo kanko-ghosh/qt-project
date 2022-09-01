@@ -47,7 +47,8 @@ public:
     QPushButton *pushButton;
     QCheckBox *show_grid;
     QSpinBox *grid_size;
-    QPushButton *temp;
+    QPushButton *bresenham_line;
+    QPushButton *dda;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -83,18 +84,25 @@ public:
         label_5->setGeometry(QRect(730, 120, 81, 20));
         x_axis = new QFrame(centralWidget);
         x_axis->setObjectName(QString::fromUtf8("x_axis"));
-        x_axis->setGeometry(QRect(0, 225, 700, 1));
+        x_axis->setGeometry(QRect(0, 225, 700, 5));
         x_axis->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        x_axis->setFrameShadow(QFrame::Raised);
+        x_axis->setLineWidth(0);
+        x_axis->setFrameShape(QFrame::HLine);
         y_axis = new QFrame(centralWidget);
         y_axis->setObjectName(QString::fromUtf8("y_axis"));
-        y_axis->setGeometry(QRect(225, 0, 1, 700));
-        y_axis->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        y_axis->setGeometry(QRect(225, 0, 5, 700));
+        y_axis->setStyleSheet(QString::fromUtf8("\n"
+"background-color: rgb(255, 255, 255);"));
+        y_axis->setFrameShadow(QFrame::Raised);
+        y_axis->setLineWidth(0);
+        y_axis->setFrameShape(QFrame::VLine);
         show_axes = new QCheckBox(centralWidget);
         show_axes->setObjectName(QString::fromUtf8("show_axes"));
         show_axes->setGeometry(QRect(720, 10, 91, 21));
         Draw = new QPushButton(centralWidget);
         Draw->setObjectName(QString::fromUtf8("Draw"));
-        Draw->setGeometry(QRect(710, 290, 101, 41));
+        Draw->setGeometry(QRect(710, 350, 101, 41));
         circle_radius = new QSpinBox(centralWidget);
         circle_radius->setObjectName(QString::fromUtf8("circle_radius"));
         circle_radius->setGeometry(QRect(790, 190, 46, 20));
@@ -112,7 +120,7 @@ public:
         set_point2->setGeometry(QRect(880, 240, 81, 23));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(710, 340, 101, 41));
+        pushButton->setGeometry(QRect(710, 400, 101, 41));
         show_grid = new QCheckBox(centralWidget);
         show_grid->setObjectName(QString::fromUtf8("show_grid"));
         show_grid->setGeometry(QRect(1120, 10, 93, 26));
@@ -121,9 +129,12 @@ public:
         grid_size->setGeometry(QRect(1120, 50, 91, 29));
         grid_size->setMinimum(5);
         grid_size->setSingleStep(2);
-        temp = new QPushButton(centralWidget);
-        temp->setObjectName(QString::fromUtf8("temp"));
-        temp->setGeometry(QRect(1050, 170, 83, 29));
+        bresenham_line = new QPushButton(centralWidget);
+        bresenham_line->setObjectName(QString::fromUtf8("bresenham_line"));
+        bresenham_line->setGeometry(QRect(830, 270, 111, 31));
+        dda = new QPushButton(centralWidget);
+        dda->setObjectName(QString::fromUtf8("dda"));
+        dda->setGeometry(QRect(710, 270, 111, 31));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -157,8 +168,9 @@ public:
         set_point2->setText(QCoreApplication::translate("MainWindow", "Set point 2", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "RESET", nullptr));
         show_grid->setText(QCoreApplication::translate("MainWindow", "Show Grid", nullptr));
-        temp->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
-    }
+        bresenham_line->setText(QCoreApplication::translate("MainWindow", "Bresenham", nullptr));
+        dda->setText(QCoreApplication::translate("MainWindow", "DDA", nullptr));
+    } // retranslateUi
 
 };
 
