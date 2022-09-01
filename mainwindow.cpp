@@ -55,7 +55,6 @@ void MainWindow::point(int x,int y)
 void MainWindow::showMousePosition(QPoint &pos)
 {
     auto pt = orig_to_user(pos.x(), pos.y());
-    std::cout << pos.x() << ":" << pos.y() << std::endl;
     ui->mouse_movement->setText(" X : "+QString::number(pt.x())+", Y : "+QString::number(pt.y()));
 }
 
@@ -166,8 +165,8 @@ void MainWindow::on_show_grid_clicked()
         }
         ui->frame->setPixmap(QPixmap::fromImage(img));
     } else {
-        for (int i = 0; i <= height_total; i++){
-            for (int j = 0; j <= height_total; j++){
+        for (int i = 0; i < height_total; i++){
+            for (int j = 0; j < height_total; j++){
                 img.setPixel(j,i,qRgb(0,0,0));
             }
         }
@@ -230,11 +229,7 @@ void MainWindow::draw_pt(int x, int y, QRgb color) {
     ui->frame->setPixmap(QPixmap::fromImage(img));
 }
 
-void MainWindow::_dda_line(int x1, int y1, int x2, int y2)
-{
-    draw_pt(x1, y1, qRgb(255,255,255));
-    draw_pt(x2, y2, qRgb(255,255,255));
-
+void MainWindow::_dda_line(int x1, int y1, int x2, int y2) {
     float dx, dy;
     float x, y;
     float Dx, Dy;
@@ -244,7 +239,6 @@ void MainWindow::_dda_line(int x1, int y1, int x2, int y2)
         draw_pt(x1, y1, qRgb(0, 255, 0));
         return;
     }
-
     dx = x2 - x1;  // total span in x
     dy = y2 - y1;  // total span in y
     x = x1;
@@ -269,7 +263,8 @@ void MainWindow::_dda_line(int x1, int y1, int x2, int y2)
     int ix, iy, end = (dx > dy)? dx: dy;  // integer x and y co-ordinates
     for(int k = 0; k <= end; k++)
     {
-        ix = (int)(x + 0.5*abs(x)/x), iy = (int)(y + 0.5*abs(y)/y);
+        ix = (x == 0) ? 0 : (int)(x + 0.5*abs(x)/x);
+        iy = (y == 0) ? 0 : (int)(y + 0.5*abs(y)/y);
         draw_pt(ix, iy, qRgb(0, 255, 0));
         x += Dx, y += Dy;
     }

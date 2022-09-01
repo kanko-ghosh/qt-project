@@ -47,6 +47,7 @@ public:
     QPushButton *pushButton;
     QCheckBox *show_grid;
     QSpinBox *grid_size;
+    QPushButton *temp;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -84,15 +85,10 @@ public:
         x_axis->setObjectName(QString::fromUtf8("x_axis"));
         x_axis->setGeometry(QRect(0, 225, 700, 1));
         x_axis->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
-//        x_axis->setFrameShape(QFrame::HLine);
-//        x_axis->setFrameShadow(QFrame::Sunken);
         y_axis = new QFrame(centralWidget);
         y_axis->setObjectName(QString::fromUtf8("y_axis"));
         y_axis->setGeometry(QRect(225, 0, 1, 700));
-        y_axis->setStyleSheet(QString::fromUtf8("\n"
-"background-color: rgb(255, 255, 255);"));
-//        y_axis->setFrameShape(QFrame::VLine);
-//        y_axis->setFrameShadow(QFrame::Sunken);
+        y_axis->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
         show_axes = new QCheckBox(centralWidget);
         show_axes->setObjectName(QString::fromUtf8("show_axes"));
         show_axes->setGeometry(QRect(720, 10, 91, 21));
@@ -125,6 +121,9 @@ public:
         grid_size->setGeometry(QRect(1120, 50, 91, 29));
         grid_size->setMinimum(5);
         grid_size->setSingleStep(2);
+        temp = new QPushButton(centralWidget);
+        temp->setObjectName(QString::fromUtf8("temp"));
+        temp->setGeometry(QRect(1050, 170, 83, 29));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -158,7 +157,8 @@ public:
         set_point2->setText(QCoreApplication::translate("MainWindow", "Set point 2", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "RESET", nullptr));
         show_grid->setText(QCoreApplication::translate("MainWindow", "Show Grid", nullptr));
-    } // retranslateUi
+        temp->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+    }
 
 };
 
