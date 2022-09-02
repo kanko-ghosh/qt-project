@@ -158,19 +158,6 @@ background-color: rgb(255, 255, 255);</string>
      <string>Show Axes</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Draw">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>350</y>
-      <width>101</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Draw</string>
-    </property>
-   </widget>
    <widget class="QSpinBox" name="circle_radius">
     <property name="geometry">
      <rect>
@@ -194,24 +181,11 @@ background-color: rgb(255, 255, 255);</string>
      <string>Draw Circle</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="draw_line">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>240</y>
-      <width>77</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Draw Line</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="set_point1">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>240</y>
+      <x>1120</x>
+      <y>120</y>
       <width>81</width>
       <height>23</height>
      </rect>
@@ -223,8 +197,8 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="set_point2">
     <property name="geometry">
      <rect>
-      <x>880</x>
-      <y>240</y>
+      <x>1120</x>
+      <y>150</y>
       <width>81</width>
       <height>23</height>
      </rect>
@@ -328,6 +302,22 @@ background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>766</x>
+      <y>241</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Line Algorithms</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>

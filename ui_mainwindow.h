@@ -38,10 +38,8 @@ public:
     QFrame *x_axis;
     QFrame *y_axis;
     QCheckBox *show_axes;
-    QPushButton *Draw;
     QSpinBox *circle_radius;
     QRadioButton *draw_circle;
-    QRadioButton *draw_line;
     QPushButton *set_point1;
     QPushButton *set_point2;
     QPushButton *pushButton;
@@ -51,6 +49,7 @@ public:
     QPushButton *dda;
     QLabel *time_label;
     QLabel *time_show;
+    QLabel *label;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -102,24 +101,18 @@ public:
         show_axes = new QCheckBox(centralWidget);
         show_axes->setObjectName(QString::fromUtf8("show_axes"));
         show_axes->setGeometry(QRect(720, 10, 91, 21));
-        Draw = new QPushButton(centralWidget);
-        Draw->setObjectName(QString::fromUtf8("Draw"));
-        Draw->setGeometry(QRect(710, 350, 101, 41));
         circle_radius = new QSpinBox(centralWidget);
         circle_radius->setObjectName(QString::fromUtf8("circle_radius"));
         circle_radius->setGeometry(QRect(790, 190, 46, 20));
         draw_circle = new QRadioButton(centralWidget);
         draw_circle->setObjectName(QString::fromUtf8("draw_circle"));
         draw_circle->setGeometry(QRect(710, 190, 81, 17));
-        draw_line = new QRadioButton(centralWidget);
-        draw_line->setObjectName(QString::fromUtf8("draw_line"));
-        draw_line->setGeometry(QRect(710, 240, 77, 17));
         set_point1 = new QPushButton(centralWidget);
         set_point1->setObjectName(QString::fromUtf8("set_point1"));
-        set_point1->setGeometry(QRect(790, 240, 81, 23));
+        set_point1->setGeometry(QRect(1120, 120, 81, 23));
         set_point2 = new QPushButton(centralWidget);
         set_point2->setObjectName(QString::fromUtf8("set_point2"));
-        set_point2->setGeometry(QRect(880, 240, 81, 23));
+        set_point2->setGeometry(QRect(1120, 150, 81, 23));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(710, 400, 101, 41));
@@ -145,6 +138,10 @@ public:
         time_show->setGeometry(QRect(1080, 610, 121, 41));
         time_show->setFrameShape(QFrame::Panel);
         time_show->setAlignment(Qt::AlignCenter);
+        label = new QLabel(centralWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(766, 241, 121, 20));
+        label->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -171,9 +168,7 @@ public:
         mouse_pressed->setText(QString());
         label_5->setText(QCoreApplication::translate("MainWindow", "Mouse Pressed", nullptr));
         show_axes->setText(QCoreApplication::translate("MainWindow", "Show Axes", nullptr));
-        Draw->setText(QCoreApplication::translate("MainWindow", "Draw", nullptr));
         draw_circle->setText(QCoreApplication::translate("MainWindow", "Draw Circle", nullptr));
-        draw_line->setText(QCoreApplication::translate("MainWindow", "Draw Line", nullptr));
         set_point1->setText(QCoreApplication::translate("MainWindow", "Set point 1", nullptr));
         set_point2->setText(QCoreApplication::translate("MainWindow", "Set point 2", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "RESET", nullptr));
@@ -182,6 +177,7 @@ public:
         dda->setText(QCoreApplication::translate("MainWindow", "DDA", nullptr));
         time_label->setText(QCoreApplication::translate("MainWindow", "Time Elapsed", nullptr));
         time_show->setText(QString());
+        label->setText(QCoreApplication::translate("MainWindow", "Line Algorithms", nullptr));
     } // retranslateUi
 
 };
