@@ -29,6 +29,7 @@ SOURCES += \
     my_label.cpp
 
 HEADERS += \
+    line_algos.h \
         mainwindow.h \
     my_label.h
 
