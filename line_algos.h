@@ -228,7 +228,7 @@ void MainWindow::on_bresenham_line_clicked()
     timer.start();
     _bresenham_debug(x1, y1, x2, y2);
     auto time = timer.nsecsElapsed();
-    ui->time_show->setText(QString::number(time))
+    ui->time_show->setText(QString::number(time));
 }
 
 

@@ -94,7 +94,7 @@ void MainWindow::on_set_point2_clicked()
     p2.setY(ui->frame->y);
 }
 
-//void MainWindow::on_Draw_clicked()
+void MainWindow::on_Draw_clicked(){
 //{
 //    int r0=ui->circle_radius->value();
 //    QPainter painter(&img);
@@ -112,7 +112,7 @@ void MainWindow::on_set_point2_clicked()
 //          painter.drawLine(p1,p2);
 //    }
 //    ui->frame->setPixmap(QPixmap::fromImage(img));
-//}
+}
 
 void MainWindow::on_pushButton_clicked()
 {
