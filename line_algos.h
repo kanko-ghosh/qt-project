@@ -202,39 +202,33 @@ void MainWindow::_bresenham_debug(int x1, int y1, int x2, int y2) {
 
 void MainWindow::on_dda_clicked()
 {
-    if(ui->draw_line->isChecked()){
-          auto pa = orig_to_user(p1.x(), p1.y());
-          auto pb = orig_to_user(p2.x(), p2.y());
-          int x1 = pa.x();
-          int y1 = pa.y();
-          int x2 = pb.x();
-          int y2 = pb.y();
-          _dda_line(x1, y1, x2, y2);
-
-          timer.start();
-          _dda_line_debug(x1, y1, x2, y2);
-          auto time = timer.nsecsElapsed();
-          ui->time_show->setText(QString::number(time));
-    }
+    auto pa = orig_to_user(p1.x(), p1.y());
+    auto pb = orig_to_user(p2.x(), p2.y());
+    int x1 = pa.x();
+    int y1 = pa.y();
+    int x2 = pb.x();
+    int y2 = pb.y();
+    _dda_line(x1, y1, x2, y2);
+    timer.start();
+    _dda_line_debug(x1, y1, x2, y2);
+    auto time = timer.nsecsElapsed();
+    ui->time_show->setText(QString::number(time));
 }
 
 
 void MainWindow::on_bresenham_line_clicked()
 {
-    if(ui->draw_line->isChecked()){
-          auto pa = orig_to_user(p1.x(), p1.y());
-          auto pb = orig_to_user(p2.x(), p2.y());
-          int x1 = pa.x();
-          int y1 = pa.y();
-          int x2 = pb.x();
-          int y2 = pb.y();
-          _bresenham(x1, y1, x2, y2);
-
-          timer.start();
-          _bresenham_debug(x1, y1, x2, y2);
-          auto time = timer.nsecsElapsed();
-          ui->time_show->setText(QString::number(time));
-    }
+    auto pa = orig_to_user(p1.x(), p1.y());
+    auto pb = orig_to_user(p2.x(), p2.y());
+    int x1 = pa.x();
+    int y1 = pa.y();
+    int x2 = pb.x();
+    int y2 = pb.y();
+    _bresenham(x1, y1, x2, y2);
+    timer.start();
+    _bresenham_debug(x1, y1, x2, y2);
+    auto time = timer.nsecsElapsed();
+    ui->time_show->setText(QString::number(time))
 }
 
 

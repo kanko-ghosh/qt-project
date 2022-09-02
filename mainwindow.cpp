@@ -84,47 +84,35 @@ void MainWindow::on_show_axes_clicked()
 }
 void MainWindow::on_set_point1_clicked()
 {
-    if(ui->draw_line->isChecked()){
-        p1.setX(ui->frame->x);
-        p1.setY(ui->frame->y);
-    }
+    p1.setX(ui->frame->x);
+    p1.setY(ui->frame->y);
 }
 
 void MainWindow::on_set_point2_clicked()
 {
-    if(ui->draw_line->isChecked()){
-        p2.setX(ui->frame->x);
-        p2.setY(ui->frame->y);
-    }
+    p2.setX(ui->frame->x);
+    p2.setY(ui->frame->y);
 }
 
-void MainWindow::on_Draw_clicked()
-{
-    int r0=ui->circle_radius->value();
-    QPainter painter(&img);
-    QPen pen;
-    pen.setWidth(1);
-    pen.setColor(Qt::red);
-    if(ui->draw_circle->isChecked()){
-        p1.setX(ui->frame->x);
-        p1.setY(ui->frame->y);
-        painter.setPen(pen);
-        painter.drawEllipse(p1,r0,r0);
-    }
-    if(ui->draw_line->isChecked()){
-          painter.setPen(Qt::red);
-          painter.drawLine(p1,p2);
-          auto pa = orig_to_user(p1.x(), p1.y());
-          auto pb = orig_to_user(p2.x(), p2.y());
-          int x1 = pa.x();
-          int y1 = pa.y();
-          int x2 = pb.x();
-          int y2 = pb.y();
-
-          _dda_line(x1, y1, x2, y2);
-    }
-    ui->frame->setPixmap(QPixmap::fromImage(img));
-}
+//void MainWindow::on_Draw_clicked()
+//{
+//    int r0=ui->circle_radius->value();
+//    QPainter painter(&img);
+//    QPen pen;
+//    pen.setWidth(1);
+//    pen.setColor(Qt::red);
+//    if(ui->draw_circle->isChecked()){
+//        p1.setX(ui->frame->x);
+//        p1.setY(ui->frame->y);
+//        painter.setPen(pen);
+//        painter.drawEllipse(p1,r0,r0);
+//    }
+//    if(ui->draw_line->isChecked()){
+//          painter.setPen(Qt::red);
+//          painter.drawLine(p1,p2);
+//    }
+//    ui->frame->setPixmap(QPixmap::fromImage(img));
+//}
 
 void MainWindow::on_pushButton_clicked()
 {
