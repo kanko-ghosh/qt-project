@@ -42,10 +42,19 @@ private:
     Ui::MainWindow *ui;
     QPoint p1,p2;
     void point(int,int);
-    QPoint orig_to_user (int x, int y);
+
+    //timer
+    QElapsedTimer timer;
+
+    //draw a point
     void draw_pt(int x, int y, QRgb color);
+    QPoint orig_to_user (int x, int y);
+
+    //line algos
     void _dda_line(int x1, int y1, int x2, int y2);
+    void _dda_line_debug(int x1, int y1, int x2, int y2);
     void _bresenham(int x1, int y1, int x2, int y2);
+    void _bresenham_debug(int x1, int y1, int x2, int y2);
 };
 
 #endif // MAINWINDOW_H

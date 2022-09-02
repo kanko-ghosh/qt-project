@@ -49,6 +49,8 @@ public:
     QSpinBox *grid_size;
     QPushButton *bresenham_line;
     QPushButton *dda;
+    QLabel *time_label;
+    QLabel *time_show;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -135,6 +137,14 @@ public:
         dda = new QPushButton(centralWidget);
         dda->setObjectName(QString::fromUtf8("dda"));
         dda->setGeometry(QRect(710, 270, 111, 31));
+        time_label = new QLabel(centralWidget);
+        time_label->setObjectName(QString::fromUtf8("time_label"));
+        time_label->setGeometry(QRect(1096, 580, 91, 20));
+        time_show = new QLabel(centralWidget);
+        time_show->setObjectName(QString::fromUtf8("time_show"));
+        time_show->setGeometry(QRect(1080, 610, 121, 41));
+        time_show->setFrameShape(QFrame::Panel);
+        time_show->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -170,6 +180,8 @@ public:
         show_grid->setText(QCoreApplication::translate("MainWindow", "Show Grid", nullptr));
         bresenham_line->setText(QCoreApplication::translate("MainWindow", "Bresenham", nullptr));
         dda->setText(QCoreApplication::translate("MainWindow", "DDA", nullptr));
+        time_label->setText(QCoreApplication::translate("MainWindow", "Time Elapsed", nullptr));
+        time_show->setText(QString());
     } // retranslateUi
 
 };
