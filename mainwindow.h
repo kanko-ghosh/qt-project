@@ -22,7 +22,7 @@ public:
 private slots:
     void on_show_axes_clicked();
 
-    void on_Draw_clicked();
+//    void on_Draw_clicked();
 
     void on_set_point1_clicked();
 
@@ -37,6 +37,10 @@ private slots:
     void on_dda_clicked();
 
     void on_bresenham_line_clicked();
+
+    void on_polar_circle_clicked();
+
+    void on_bresenham_cicle_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -55,6 +59,9 @@ private:
     void _dda_line_debug(int x1, int y1, int x2, int y2);
     void _bresenham(int x1, int y1, int x2, int y2);
     void _bresenham_debug(int x1, int y1, int x2, int y2);
+
+    //circle
+    void _polar_circle(int x1, int y1, int r);
 };
 
 #endif // MAINWINDOW_H
