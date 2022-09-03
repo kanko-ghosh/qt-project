@@ -29,6 +29,8 @@ SOURCES += \
     my_label.cpp
 
 HEADERS += \
+    circle_algos.h \
+    ellipse_algos.h \
     line_algos.h \
         mainwindow.h \
     my_label.h

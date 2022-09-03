@@ -219,51 +219,5 @@ void MainWindow::draw_pt(int x, int y, QRgb color) {
 }
 
 #include "line_algos.h"
-
-void MainWindow::on_polar_circle_clicked()
-{
-    auto pa = orig_to_user(p1.x(), p1.y());
-    auto r = ui->circle_radius->value();
-    int x1 = pa.x();
-    int y1 = pa.y();
-    _polar_circle(x1, y1, r);
-//    timer.start();
-//    _polar_circle_debug(x1, y1, r);
-//    auto time = timer.nsecsElapsed();
-//    ui->time_show->setText(QString::number(time));
-}
-
-
-#include<cmath>
-
-void MainWindow::_polar_circle(int xc, int yc, int r){
-    if ( r <= 0 ) return;
-    else {
-        std::cout << "r" << std::endl;
-        for (int i = 0; ((float)i)/r <= 6.3; i++){
-            float theta = ((float)i)/r;
-            float x = xc + r*std::cos(theta);
-            float y = yc + r*std::sin(theta);
-            int ix = (x == 0) ? 0 : (int)(x + 0.5*abs(x)/x);
-            int iy = (y == 0) ? 0 : (int)(y + 0.5*abs(y)/y);
-            draw_pt(ix, iy, qRgb(0, 0, 255));
-        }
-        ui->frame->setPixmap(QPixmap::fromImage(img));
-    }
-}
-
-void MainWindow::on_bresenham_cicle_clicked()
-{
-    auto pa = orig_to_user(p1.x(), p1.y());
-    auto pb = orig_to_user(p2.x(), p2.y());
-    int x1 = pa.x();
-    int y1 = pa.y();
-    int x2 = pb.x();
-    int y2 = pb.y();
-    _bresenham(x1, y1, x2, y2);
-    timer.start();
-    _bresenham_debug(x1, y1, x2, y2);
-    auto time = timer.nsecsElapsed();
-    ui->time_show->setText(QString::number(time));
-}
-
+#include "circle_algos.h"
+#include "ellipse_algos.h"

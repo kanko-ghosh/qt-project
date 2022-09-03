@@ -42,6 +42,10 @@ private slots:
 
     void on_bresenham_cicle_clicked();
 
+    void on_polar_ellipse_clicked();
+
+    void on_bresenham_ellipse_clicked();
+
 private:
     Ui::MainWindow *ui;
     QPoint p1,p2;
@@ -62,6 +66,15 @@ private:
 
     //circle
     void _polar_circle(int x1, int y1, int r);
+    void _polar_circle_debug(int xc, int yc, int r);
+    void _bresenham_circle(int xc, int yc, int r);
+    void _bresenham_circle_debug(int xc, int yc, int r);
+
+    //ellipse
+    void _polar_ellipse(int xc, int yc, int rx, int ry);
+    void _polar_ellipse_debug(int xc, int yc, int rx, int ry);
+    void _bresenham_ellipse(int xc, int yc, int rx, int ry);
+    void _bresenham_ellipse_debug(int xc, int yc, int rx, int ry);
 };
 
 #endif // MAINWINDOW_H
