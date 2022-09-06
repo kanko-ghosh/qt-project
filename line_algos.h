@@ -9,6 +9,8 @@ void MainWindow::_dda_line(int x1, int y1, int x2, int y2) {
     // Base Case
     if(x1 == x2 && y1 == y2){
         draw_pt(x1, y1, qRgb(0, 255, 0));
+        ui->frame->repaint();
+        Sleeper::msleep(50);
         return;
     }
     dx = x2 - x1;  // total span in x
@@ -38,6 +40,8 @@ void MainWindow::_dda_line(int x1, int y1, int x2, int y2) {
         ix = (x == 0) ? 0 : (int)(x + 0.5*abs(x)/x);
         iy = (y == 0) ? 0 : (int)(y + 0.5*abs(y)/y);
         draw_pt(ix, iy, qRgb(0, 255, 0));
+        ui->frame->repaint();
+        Sleeper::msleep(50);
         x += Dx, y += Dy;
     }
 }
@@ -80,7 +84,11 @@ void MainWindow::_bresenham(int x1, int y1, int x2, int y2) {
     if(y1 == y2)
         {
             int start = std::min(x1, x2), end = std::max(x1, x2);
-            for(int i = start; i <= end; i++) draw_pt(i, y1, qRgb(255,255,0));
+            for(int i = start; i <= end; i++) {
+                draw_pt(i, y1, qRgb(255,255,0));
+                ui->frame->repaint();
+                Sleeper::msleep(50);
+            }
             return;
         }
 
@@ -88,7 +96,11 @@ void MainWindow::_bresenham(int x1, int y1, int x2, int y2) {
         if(x1 == x2)
         {
             int start = std::min(y1, y2), end = std::max(y1, y2);
-            for(int j = start; j <= end; j++) draw_pt(x1, j, qRgb(255,255,0));
+            for(int j = start; j <= end; j++) {
+                draw_pt(x1, j, qRgb(255,255,0));
+                ui->frame->repaint();
+                Sleeper::msleep(50);
+            }
             return;
         }
 
@@ -101,7 +113,10 @@ void MainWindow::_bresenham(int x1, int y1, int x2, int y2) {
 
             int j = (dy > 0)? y1: (y1 + 1);
             p = 2 * dy - dx;
-            draw_pt(x1, y1, qRgb(255,255,0));  // Plotting initial point ...
+            draw_pt(x1, y1, qRgb(255,255,0));
+            ui->frame->repaint();
+            Sleeper::msleep(50);
+            // Plotting initial point ...
             for(int i = x1 + 1; i <= x2; i++)
             {
                 if(dy > 0)
@@ -116,6 +131,8 @@ void MainWindow::_bresenham(int x1, int y1, int x2, int y2) {
                 }
 
                 draw_pt(i, j, qRgb(255,255,0));
+                ui->frame->repaint();
+                Sleeper::msleep(50);
             }
         }
 
@@ -126,7 +143,10 @@ void MainWindow::_bresenham(int x1, int y1, int x2, int y2) {
 
             int i = (dx > 0)? x1: (x1 + 1);
             p = 2 * dx - dy;
-            draw_pt(x1, y1, qRgb(255,255,0));  // Plotting initial point ...
+            draw_pt(x1, y1, qRgb(255,255,0));
+            ui->frame->repaint();
+            Sleeper::msleep(50);
+            // Plotting initial point ...
             for(int j = y1 + 1; j <= y2; j++)
             {
                 if(dx > 0)
@@ -141,6 +161,8 @@ void MainWindow::_bresenham(int x1, int y1, int x2, int y2) {
                 }
 
                 draw_pt(i, j, qRgb(255,255,0));
+                ui->frame->repaint();
+                Sleeper::msleep(50);
             }
         }
 
