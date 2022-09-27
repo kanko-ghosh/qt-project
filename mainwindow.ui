@@ -459,6 +459,19 @@ background-color: rgb(255, 255, 255);</string>
      <string>Radius-Y</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="scanline">
+    <property name="geometry">
+     <rect>
+      <x>725</x>
+      <y>460</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ScanLine-Fill</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

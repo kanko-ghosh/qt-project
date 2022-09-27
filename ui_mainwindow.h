@@ -59,6 +59,7 @@ public:
     QSpinBox *radius_x;
     QSpinBox *radius_y;
     QLabel *radius_3;
+    QPushButton *scanline;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -185,6 +186,9 @@ public:
         radius_3 = new QLabel(centralWidget);
         radius_3->setObjectName(QString::fromUtf8("radius_3"));
         radius_3->setGeometry(QRect(720, 420, 61, 20));
+        scanline = new QPushButton(centralWidget);
+        scanline->setObjectName(QString::fromUtf8("scanline"));
+        scanline->setGeometry(QRect(725, 460, 111, 31));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -229,6 +233,7 @@ public:
         bresenham_ellipse->setText(QCoreApplication::translate("MainWindow", "Bresenham", nullptr));
         radius_2->setText(QCoreApplication::translate("MainWindow", "Radius-X", nullptr));
         radius_3->setText(QCoreApplication::translate("MainWindow", "Radius-Y", nullptr));
+        scanline->setText(QCoreApplication::translate("MainWindow", "ScanLine-Fill", nullptr));
     } // retranslateUi
 
 };

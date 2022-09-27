@@ -5,6 +5,14 @@
 #include <QtGui>
 #include <QtCore>
 
+class Edge {
+public:
+    int yUpper;
+    float xIntersect;
+    float dxPerScan;
+    Edge * next;
+};
+
 namespace Ui {
 class MainWindow;
 }
@@ -46,6 +54,8 @@ private slots:
 
     void on_bresenham_ellipse_clicked();
 
+    void on_scanline_clicked();
+
 private:
     Ui::MainWindow *ui;
     QPoint p1,p2;
@@ -60,6 +70,7 @@ private:
 
     //line algos
     void _dda_line(int x1, int y1, int x2, int y2);
+    void _dda_line_scanfill(int x1, int y1, int x2, int y2);
     void _dda_line_debug(int x1, int y1, int x2, int y2);
     void _bresenham(int x1, int y1, int x2, int y2);
     void _bresenham_debug(int x1, int y1, int x2, int y2);
@@ -75,6 +86,20 @@ private:
     void _polar_ellipse_debug(int xc, int yc, int rx, int ry);
     void _bresenham_ellipse(int xc, int yc, int rx, int ry);
     void _bresenham_ellipse_debug(int xc, int yc, int rx, int ry);
+
+    //scanfill
+    int to_do;
+    std::vector<QPoint> list_scan;
+    void _scan_fill(std::vector<QPoint> list_scan);
+    void resortActiveList (Edge * active);
+    void updateActiveList (int scan, Edge * active);
+    void deleteAfter (Edge * q);
+    void fillScan (int scan, Edge * active);
+    void buildActiveList (int scan, Edge * active, Edge * edges[]);
+    void buildEdgeList (std::vector<QPoint> pts, Edge * edges[]);
+    void makeEdgeRec(QPoint lower, QPoint upper, int yComp, Edge * edge, Edge * edges[]);
+    void insertEdge(Edge * list, Edge * edge);
+    int yNext (int k, std::vector<QPoint> pts );
 };
 
 #endif // MAINWINDOW_H

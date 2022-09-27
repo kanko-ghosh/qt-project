@@ -46,6 +46,47 @@ void MainWindow::_dda_line(int x1, int y1, int x2, int y2) {
     }
 }
 
+void MainWindow::_dda_line_scanfill(int x1, int y1, int x2, int y2) {
+    float dx, dy;
+    float x, y;
+    float Dx, Dy;
+
+    // Base Case
+    if(x1 == x2 && y1 == y2){
+        draw_pt(x1, y1, qRgb(0, 255, 0));
+        return;
+    }
+    dx = x2 - x1;  // total span in x
+    dy = y2 - y1;  // total span in y
+    x = x1;
+    y = y1;
+
+    // incremental steps in x and y
+    if(abs(dx) > abs(dy))
+    {
+        Dx = (dx > 0)? 1: -1;
+        Dy = dy / abs(dx);
+    }
+    else
+    {
+        Dx = dx / abs(dy);
+        Dy = (dy > 0)? 1: -1;
+    }
+
+    // to get the number of iterations correctly
+    if(dx < 0) dx = -dx;
+    if(dy < 0) dy = -dy;
+
+    int ix, iy, end = (dx > dy)? dx: dy;  // integer x and y co-ordinates
+    for(int k = 0; k <= end; k++)
+    {
+        ix = (x == 0) ? 0 : (int)(x + 0.5*abs(x)/x);
+        iy = (y == 0) ? 0 : (int)(y + 0.5*abs(y)/y);
+        draw_pt(ix, iy, qRgb(0, 255, 0));
+        x += Dx, y += Dy;
+    }
+}
+
 void MainWindow::_dda_line_debug(int x1, int y1, int x2, int y2) {
     float dx, dy;
     float x, y;
