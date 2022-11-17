@@ -29,11 +29,16 @@ SOURCES += \
     my_label.cpp
 
 HEADERS += \
+    beizer.h \
     circle_algos.h \
+    clipping.h \
     ellipse_algos.h \
     line_algos.h \
         mainwindow.h \
-    my_label.h
+    my_label.h \
+    scanfill.h \
+    seedfill.h \
+    transformations.h
 
 FORMS += \
         mainwindow.ui

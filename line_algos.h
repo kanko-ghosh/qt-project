@@ -112,10 +112,10 @@ void MainWindow::_dda_line_debug(int x1, int y1, int x2, int y2) {
     if(dx < 0) dx = -dx;
     if(dy < 0) dy = -dy;
 
-    int ix, iy, end = (dx > dy)? dx: dy;
+    int end = (dx > dy)? dx: dy;
     for(int k = 0; k <= end; k++) {
-        ix = (x == 0) ? 0 : (int)(x + 0.5*abs(x)/x);
-        iy = (y == 0) ? 0 : (int)(y + 0.5*abs(y)/y);
+        int ix = (x == 0) ? 0 : (int)(x + 0.5*abs(x)/x);
+        int iy = (y == 0) ? 0 : (int)(y + 0.5*abs(y)/y);
         x += Dx, y += Dy;
     }
 }
@@ -226,8 +226,13 @@ void MainWindow::_bresenham_debug(int x1, int y1, int x2, int y2) {
 
         // Case for |m| <= 1
         if(abs(dy) <= abs(dx)) {
-            if(x1 > x2) std::swap(x1, x2), std::swap(y1, y2), dx = -dx, dy = -dy;
-
+            if(x1 > x2) {
+                std::swap(x1, x2);
+                std::swap(y1, y2);
+                dx = -dx;
+                dy = -dy;
+            }
+            
             int j = (dy > 0)? y1: (y1 + 1);
             p = 2 * dy - dx;
             for(int i = x1 + 1; i <= x2; i++) {
@@ -244,7 +249,11 @@ void MainWindow::_bresenham_debug(int x1, int y1, int x2, int y2) {
 
         // Case for |m| > 1
         else {
-            if(y1 > y2) std::swap(x1, x2), std::swap(y1, y2), dx = -dx, dy = -dy;
+            if(y1 > y2) {
+                std::swap(x1, x2);
+                std::swap(y1, y2);
+                dx = -dx;dy = -dy;
+            }
 
             int i = (dx > 0)? x1: (x1 + 1);
             p = 2 * dx - dy;

@@ -43,6 +43,29 @@ void MainWindow::_polar_circle(int xc, int yc, int r){
     }
 }
 
+
+void MainWindow::_polar_circle_clock(int xc, int yc, int r){
+    if ( r <= 0 ) return;
+    else {
+        for (int i = 0; ((float)i)/r <= 0.79; i++){
+            float theta = ((float)i)/r;
+            float xa = r*std::cos(theta);
+            float ya = r*std::sin(theta);
+            int ixa = (xa == 0) ? 0 : (int)(xa + 0.5*abs(xa)/xa);
+            int iya = (ya == 0) ? 0 : (int)(ya + 0.5*abs(ya)/ya);
+            draw_pt(xc+ixa, yc+iya, qRgb(0, 0, 255));
+            draw_pt(xc-ixa, yc+iya, qRgb(0, 0, 255));
+            draw_pt(xc+ixa, yc-iya, qRgb(0, 0, 255));
+            draw_pt(xc-ixa, yc-iya, qRgb(0, 0, 255));
+            draw_pt(xc+iya, yc+ixa, qRgb(0, 0, 255));
+            draw_pt(xc-iya, yc+ixa, qRgb(0, 0, 255));
+            draw_pt(xc+iya, yc-ixa, qRgb(0, 0, 255));
+            draw_pt(xc-iya, yc-ixa, qRgb(0, 0, 255));
+        }
+        ui->frame->setPixmap(QPixmap::fromImage(img));
+    }
+}
+
 void MainWindow::_polar_circle_debug(int xc, int yc, int r){
     if ( r <= 0 ) return;
     else {
